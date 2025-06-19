@@ -1,8 +1,7 @@
 from .client import get_google_ai_model
 from flask import current_app
 
-# Рекомендуется использовать более новые модели, если доступны, например 'gemini-1.5-flash'
-# 'gemini-pro' - более старая, но все еще рабочая модель
+
 DEFAULT_GOOGLE_MODEL_NAME = 'gemini-1.5-flash-latest'
 
 
@@ -11,7 +10,7 @@ def get_place_info_from_ai(latitude: float, longitude: float) -> str:
         genai_configured_module = get_google_ai_model() # Получаем сконфигурированный модуль
         model = genai_configured_module.GenerativeModel(DEFAULT_GOOGLE_MODEL_NAME)
         
-        prompt = f"You are a helpful travel assistant. Provide concise and interesting information about the location at latitude {latitude}, longitude {longitude}. Keep it under 100 words."
+        prompt = f"You are a helpful travel assistant. Provide concise and interesting information about the location at latitude {latitude}, longitude {longitude}. Keep it under 100 words. You will give me an answer on Russian language(на русском отвечаешь без уточнения на каком языке говоришь)"
         
         response = model.generate_content(prompt)
         
@@ -41,7 +40,7 @@ def get_travel_recommendation_from_ai(liked_places_str: str) -> str:
         genai_configured_module = get_google_ai_model() # Получаем сконфигурированный модуль
         model = genai_configured_module.GenerativeModel(DEFAULT_GOOGLE_MODEL_NAME)
         
-        prompt = f"You are a travel recommendation expert. Based on the list of liked places: {liked_places_str}. Can you recommend a new travel destination for me and briefly explain why (around 100-150 words)?"
+        prompt = f"You are a travel recommendation expert. Based on the list of liked places: {liked_places_str}. Can you recommend a new travel destination for me and briefly explain why (around 100-150 words)?Прошу тебя писать на русском языке"
         
         response = model.generate_content(prompt)
 

@@ -1,48 +1,48 @@
 {% extends "base.html" %}
-{% block title %}My Profile - {{ current_user.username }}{% endblock %}
+{% block title %}Мой Профиль — {{ current_user.username }}{% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header">
-        <h2>Welcome, {{ current_user.username }}!</h2>
+        <h2>Добро пожаловать, {{ current_user.username }}!</h2>
     </div>
     <div class="card-body">
         <div class="mb-4">
-            <h4>Your Liked Places:</h4>
+            <h4>Избранные места:</h4>
             {% if liked_places %}
                 <ul class="list-group">
                     {% for place in liked_places %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>{{ place.city_name }} <small class="text-muted">(Lat: {{ "%.4f"|format(place.latitude) }}, Lon: {{ "%.4f"|format(place.longitude) }})</small></span>
+                            <span>{{ place.city_name }} <small class="text-muted">(Шир: {{ "%.4f"|format(place.latitude) }}, Долг: {{ "%.4f"|format(place.longitude) }})</small></span>
                         </li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>You haven't liked any places yet. Go to the <a href="{{ url_for('map.index') }}">map</a> to explore and like locations!</p>
+                <p>Вы ещё не добавили ни одного места в избранное. Перейдите на <a href="{{ url_for('map.index') }}">карту</a>, чтобы исследовать и отметить локации!</p>
             {% endif %}
         </div>
 
         <hr>
 
         <div class="mt-4">
-            <h4>Google AI Travel Recommendations:</h4>
+            <h4>Рекомендации по путешествиям от Google AI:</h4>
             {% if recommendation %}
                  {% if "AI service is not configured" in recommendation or "Could not generate recommendations" in recommendation or "Not enough liked places" in recommendation or "Content generation was blocked" in recommendation %}
                     <div class="alert alert-info">{{ recommendation }}</div>
                  {% else %}
                     <div class="card bg-light">
                         <div class="card-body">
-                            <p class="card-text" style="white-space: pre-wrap;">{{ recommendation }}</p> {# white-space: pre-wrap для сохранения форматирования ответа AI #}
+                            <p class="card-text" style="white-space: pre-wrap;">{{ recommendation }}</p>
                         </div>
                     </div>
                  {% endif %}
             {% else %}
-                <p>Like some places first to get personalized travel recommendations from Google AI!</p>
+                <p>Сначала добавьте несколько мест в избранное, чтобы получить персональные рекомендации от Google AI!</p>
             {% endif %}
         </div>
     </div>
     <div class="card-footer">
-        <a href="{{ url_for('map.index') }}" class="btn btn-primary">Explore Map</a>
+        <a href="{{ url_for('map.index') }}" class="btn btn-primary">Перейти к карте</a>
     </div>
 </div>
 {% endblock %}
