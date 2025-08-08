@@ -1,0 +1,5 @@
+ - [архитектура и структура проекта](docs/architecture.md)
+ - [установка окружения и запуск (Windows/Linux)](docs/setup.md)
+ - [работа с репозиторием (ветвление, линтеры, форматирование)](docs/repository.md)
+ - [тестирование: структура и запуск](docs/testing.md)
+ - [зависимости: dev/lint, PyTorch/transformers и кроссплатформенная установка](docs/dependencies.md)

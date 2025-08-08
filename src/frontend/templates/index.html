@@ -1,0 +1,91 @@
+{% extends "base.html" %} {% block title %}Главная - AI Карта Путешествий
+(Google AI){% endblock %} {% block head_extra %}
+<!-- Стили для карты и основного дизайна -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.css"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/style.css') }}"
+/>
+
+<!-- Скрипты для карты (загружаются в <head>) -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
+<script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
+{% endblock %} {% block content %}
+
+<!-- Основной контейнер для карты -->
+<div class="row">
+  <div class="col-md-12">
+    <!-- Обертка для карты с классом для растягивания -->
+    <div class="card card-map-wrapper p-0">
+      <div id="map"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно (скрыто по умолчанию) -->
+<div id="modal-overlay">
+  <div id="info-modal" class="card">
+    <button id="modal-close-btn">×</button>
+    <div class="card-body">
+      <h4 id="modal-title" class="card-title">Информация о локации</h4>
+
+      <!-- Контент от AI -->
+      <div id="modal-content">
+        <!-- Сюда будет загружена информация -->
+      </div>
+
+      <!-- Форма добавления в избранное (для залогиненных) -->
+      {% if current_user.is_authenticated %}
+      <div id="like-place-modal-section" class="mt-4" style="display: none">
+        <hr style="border-color: var(--glass-border)" />
+        <h5 class="mt-4">Понравилось это место?</h5>
+        <form
+          id="like-place-form"
+          method="POST"
+          action="{{ url_for('profile_router.like_place_route') }}"
+        >
+          <input type="hidden" name="latitude" id="form-latitude" />
+          <input type="hidden" name="longitude" id="form-longitude" />
+          <div class="form-group mb-3">
+            <label for="form-city-name" class="form-label text-secondary mb-2"
+              >Название или описание:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="form-city-name"
+              name="city_name"
+              required
+            />
+          </div>
+          <button type="submit" class="btn w-100">Добавить в избранное</button>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Конфигурация страницы для JS через data-атрибуты -->
+<div id="page-config"
+     data-get-info-url="{{ url_for('map.get_location_info_route') }}"
+     data-ai-configured="{{ ai_service_configured | tojson }}"
+     data-authenticated="{{ 'true' if current_user.is_authenticated else 'false' }}"
+     style="display:none"></div>
+
+{% endblock %} {% block scripts_extra %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
