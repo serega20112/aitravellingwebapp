@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 from src.backend.config import _config
 from src.backend.delivery.routes import auth_router, map_router, profile_router
+from src.backend.delivery.routes import chat_router
 from src.backend.delivery.routes import logs_router
 from src.backend.infrastructure.services.ai_service import AIService
 from src.backend.infrastructure.db.uow import SqlAlchemyUnitOfWork
@@ -15,6 +16,7 @@ from src.backend.utils.logging_setup import setup_logging
 from src.backend.infrastructure.logging.es_query_service import (
     ElasticsearchLogService,
 )
+from src.backend.repository.chat.memory_chat_repository import ChatMemoryRepository
 
 
 def create_app(config_class=None):
@@ -85,11 +87,14 @@ def create_app(config_class=None):
         app.register_blueprint(map_router.bp)
         app.register_blueprint(profile_router.bp)
         app.register_blueprint(logs_router.bp)
+        app.register_blueprint(chat_router.bp)
 
     # Композиция зависимостей приложения (DI)
     # Общий AI сервис (тяжёлый объект) создаём один раз и переиспользуем
     ai_service = AIService()
     app.extensions.setdefault("services", {})
+    app.extensions["services"]["ai_service"] = ai_service
+    app.extensions["services"]["chat_repo"] = ChatMemoryRepository(max_messages=30)
     # PlaceService на базе UoW и AI
     app.extensions["services"]["place_service"] = PlaceService(
         place_use_case=PlaceUseCase(

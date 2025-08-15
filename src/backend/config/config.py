@@ -47,5 +47,10 @@ class Config:
     # Feature flags / visibility
     SHOW_LOGS_LINK: bool = os.getenv("SHOW_LOGS_LINK", "false").lower() == "true"
 
+    # Hugging Face Inference settings
+    HF_TOKEN: str | None = os.getenv("HF_TOKEN")
+    HF_PROVIDER: str = os.getenv("HF_PROVIDER", "fireworks-ai")
+    HF_MODEL: str = os.getenv("HF_MODEL", "openai/gpt-oss-120b")
+
 
 _config = Config()

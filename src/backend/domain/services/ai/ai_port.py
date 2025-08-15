@@ -3,8 +3,9 @@ from abc import ABC, abstractmethod
 
 class IAIService(ABC):
     """
-    Порт (абстракция) для AI-сервиса генерации текста/рекомендаций.
-    Реализации должны располагаться во внешних слоях (infrastructure/services).
+    Порт сервиса ИИ для туристического ассистента.
+    Предоставляет методы получения краткой информации о месте,
+    рекомендаций для путешествий и диалогового чата.
     """
 
     @abstractmethod
@@ -15,4 +16,12 @@ class IAIService(ABC):
     @abstractmethod
     def get_travel_recommendation(self, liked_places_str: str) -> str:
         """Возвращает рекомендацию для путешествий на основе списка понравившихся мест."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def chat(self, messages: list[dict[str, str]]) -> str:
+        """
+        Ведёт диалог в формате чата. На вход список сообщений вида
+        {"role": "user|assistant|system", "content": "..."}. Возвращает ответ ассистента.
+        """
         raise NotImplementedError

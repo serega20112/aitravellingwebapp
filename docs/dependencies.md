@@ -13,7 +13,7 @@
 ```
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 ```
-- CUDA 12.1 (пример):
+- CUDA 12.1:
 ```
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 ```

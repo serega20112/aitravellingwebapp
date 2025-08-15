@@ -1,77 +1,123 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
+from typing import List, Dict
 from flask import current_app
+from huggingface_hub import InferenceClient
 
 from src.backend.domain.services.ai.ai_port import IAIService
-from src.backend.infrastructure.client.init_model.ai_config import MODEL_CONFIG
 
 
 class AIService(IAIService):
-    def __init__(self, lazy: bool = True):
-        model_path = MODEL_CONFIG["model_path"]
-        # Исправление: корректный выбор устройства
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        # Параметры генерации
-        self.temperature = MODEL_CONFIG.get("temperature", 0.7)
-        self.top_p = MODEL_CONFIG.get("top_p", 0.95)
-        self.do_sample = MODEL_CONFIG.get("do_sample", True)
-        self.max_new_tokens = MODEL_CONFIG.get("max_new_tokens", 100)
-        # Lazy init
-        self._model_path = model_path
-        self._lazy = lazy
-        self.tokenizer = None
-        self.model = None
+    """
+    Сервис ИИ на базе Hugging Face Inference API для туристического ассистента.
+    Поддерживает краткие описания мест, рекомендации и чат-диалоги.
+    """
 
-    def _ensure_loaded(self):
-        if self.model is None or self.tokenizer is None:
-            # Отложенная загрузка ресурсов
-            self.tokenizer = AutoTokenizer.from_pretrained(self._model_path)
-            self.model = AutoModelForCausalLM.from_pretrained(self._model_path).to(self.device)
+    def __init__(self, config: dict | None = None):
+        """
+        Инициализирует клиента Inference и параметры модели из конфигурации.
+        Ожидает ключи: HF_TOKEN, HF_PROVIDER, HF_MODEL.
+        """
+        self._cfg = config
+        self._client: InferenceClient | None = None
+        self._model: str | None = None
 
-    def _generate(self, prompt: str) -> str:
-        # Гарантируем, что модель загружена
-        self._ensure_loaded()
-        inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
-        with torch.no_grad():
-            outputs = self.model.generate(
-                **inputs,
-                max_new_tokens=self.max_new_tokens,
-                temperature=self.temperature,
-                top_p=self.top_p,
-                do_sample=self.do_sample,
-                early_stopping=MODEL_CONFIG.get("early_stopping", True),
+    def _ensure_client(self) -> InferenceClient:
+        """
+        Возвращает готовый клиент InferenceClient, создавая его при первом обращении.
+        """
+        if self._client is not None:
+            return self._client
+        cfg = self._cfg or current_app.config
+        token = cfg.get("HF_TOKEN")
+        provider = cfg.get("HF_PROVIDER", "fireworks-ai")
+        model = cfg.get("HF_MODEL", "openai/gpt-oss-120b")
+        if not token:
+            raise RuntimeError("HF_TOKEN не задан в конфигурации")
+        self._client = InferenceClient(provider=provider, api_key=token)
+        self._model = model
+        return self._client
+
+    def chat(self, messages: List[Dict[str, str]]) -> str:
+        """
+        Возвращает ответ ассистента на список сообщений чата без тематических ограничений.
+        """
+        if not messages:
+            return "Пожалуйста, задайте вопрос."
+        client = self._ensure_client()
+        system_preamble = {
+            "role": "system",
+            "content": (
+                "Ты — вежливый, лаконичный и полезный помощник. Отвечай по-русски,"
+                " будь точен и старайся давать практичные ответы."
+            ),
+        }
+        payload = [system_preamble] + messages
+        try:
+            completion = client.chat.completions.create(
+                model=self._model or "openai/gpt-oss-120b",
+                messages=payload,
             )
-        generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        return generated_text[len(prompt):].strip()
+            return completion.choices[0].message["content"] if completion.choices else ""
+        except Exception as e:
+            current_app.logger.error(f"Ошибка чата ИИ: {e}", exc_info=True)
+            return "Не удалось получить ответ. Попробуйте позже."
 
     def get_place_info(self, latitude: float, longitude: float) -> str:
+        """
+        Возвращает краткое описание места по координатам на русском языке.
+        """
         prompt = (
-            f"Ты — полезный туристический ассистент. Предоставь краткую и интересную информацию "
-            f"о месте с координатами широта {latitude}, долгота {longitude}. "
-            f"Не больше 100 слов. Пиши на русском языке."
+            f"Координаты: широта {latitude}, долгота {longitude}. "
+            f"Дай краткое, интересное и полезное описание для туриста (до 100 слов)."
         )
+        client = self._ensure_client()
         try:
-            response_text = self._generate(prompt)
-            if not response_text:
-                current_app.logger.warning("Пустой ответ от модели на get_place_info.")
-                return "Не удалось получить информацию: пустой ответ модели."
-            return response_text
+            completion = client.chat.completions.create(
+                model=self._model or "openai/gpt-oss-120b",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "Ты туристический ассистент. Пиши кратко и по делу на русском.",
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+            )
+            text = completion.choices[0].message["content"] if completion.choices else ""
+            if not text:
+                current_app.logger.warning("Пустой ответ от модели на get_place_info")
+                return "Не удалось получить информацию о месте."
+            return text
         except Exception as e:
             current_app.logger.error(f"Ошибка генерации get_place_info: {e}", exc_info=True)
-            return f"Ошибка сервиса ИИ: {str(e)}"
+            return "Произошла ошибка сервиса ИИ."
 
     def get_travel_recommendation(self, liked_places_str: str) -> str:
+        """
+        Возвращает рекомендацию нового места на основе списка понравившихся мест.
+        """
+        client = self._ensure_client()
         prompt = (
-            f"Ты — эксперт по рекомендациям путешествий. На основе списка понравившихся мест: {liked_places_str}. "
-            f"Порекомендуй новое место для путешествия и кратко объясни почему (около 100-150 слов). "
-            f"Пиши на русском языке."
+            "Мне нравятся следующие места: "
+            + liked_places_str
+            + ". Предложи новое направление и кратко объясни выбор (100–150 слов)."
         )
         try:
-            response_text = self._generate(prompt)
-            if not response_text:
-                current_app.logger.warning("Пустой ответ от модели на get_travel_recommendation.")
-                return "Не удалось получить рекомендации: пустой ответ модели."
-            return response_text
+            completion = client.chat.completions.create(
+                model=self._model or "openai/gpt-oss-120b",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "Ты эксперт по путешествиям. Учитывай предпочтения пользователя.",
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+            )
+            text = completion.choices[0].message["content"] if completion.choices else ""
+            if not text:
+                current_app.logger.warning("Пустой ответ от модели на get_travel_recommendation")
+                return "Не удалось получить рекомендации."
+            return text
         except Exception as e:
-            current_app.logger.error(f"Ошибка генерации get_travel_recommendation: {e}", exc_info=True)
-            return f"Ошибка сервиса ИИ: {str(e)}"
+            current_app.logger.error(
+                f"Ошибка генерации get_travel_recommendation: {e}", exc_info=True
+            )
+            return "Произошла ошибка сервиса ИИ."

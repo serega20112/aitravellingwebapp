@@ -1977,3 +1977,683 @@
   "user_id": null
 }
 {"level": "INFO", "logger": "werkzeug", "message": " * Restarting with stat", "time": "2025-08-08T19:15:40", "pathname": "D:\\github_projects\\aitravelling_ddd_structure\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py", "lineno": 97, "request_id": null, "user_id": null}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:N/A duration:4.086s]",
+  "time": "2025-08-09T17:04:21",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 372,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.node_pool",
+  "message": "Node <Urllib3HttpNode(http://localhost:9200)> has failed for 1 times in a row, putting on 1 second timeout",
+  "time": "2025-08-09T17:04:21",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 249,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.transport",
+  "message": "Retrying request after failure (attempt 0 of 3)",
+  "time": "2025-08-09T17:04:21",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 415,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:N/A duration:4.067s]",
+  "time": "2025-08-09T17:04:25",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 372,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.node_pool",
+  "message": "Node <Urllib3HttpNode(http://localhost:9200)> has failed for 2 times in a row, putting on 2 second timeout",
+  "time": "2025-08-09T17:04:25",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 249,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.transport",
+  "message": "Retrying request after failure (attempt 1 of 3)",
+  "time": "2025-08-09T17:04:25",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 415,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.node_pool",
+  "message": "Resurrected node <Urllib3HttpNode(http://localhost:9200)> (force=False)",
+  "time": "2025-08-09T17:04:25",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 310,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:N/A duration:4.091s]",
+  "time": "2025-08-09T17:04:29",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 372,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.node_pool",
+  "message": "Node <Urllib3HttpNode(http://localhost:9200)> has failed for 3 times in a row, putting on 4 second timeout",
+  "time": "2025-08-09T17:04:29",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 249,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.transport",
+  "message": "Retrying request after failure (attempt 2 of 3)",
+  "time": "2025-08-09T17:04:29",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 415,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.node_pool",
+  "message": "Resurrected node <Urllib3HttpNode(http://localhost:9200)> (force=False)",
+  "time": "2025-08-09T17:04:29",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 310,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:N/A duration:4.110s]",
+  "time": "2025-08-09T17:04:34",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 372,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.node_pool",
+  "message": "Node <Urllib3HttpNode(http://localhost:9200)> has failed for 4 times in a row, putting on 8 second timeout",
+  "time": "2025-08-09T17:04:34",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 249,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://192.168.0.141:5000",
+  "time": "2025-08-09T17:04:34",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-09T17:04:34",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-09T17:04:34",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "ERROR",
+  "logger": "src.backend.create_app",
+  "message": "Ошибка генерации get_place_info: Using MXFP4 quantized models requires a GPU",
+  "time": "2025-08-09T17:07:01",
+  "pathname": "D:\\github_projects\\aitravel\\src\\backend\\infrastructure\\services\\ai_service.py",
+  "lineno": 60,
+  "request_id": "71a84763-5178-457a-845b-5f114d38e9e4",
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:N/A duration:4.070s]",
+  "time": "2025-08-09T17:42:19",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 372,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.node_pool",
+  "message": "Node <Urllib3HttpNode(http://localhost:9200)> has failed for 1 times in a row, putting on 1 second timeout",
+  "time": "2025-08-09T17:42:19",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 249,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.transport",
+  "message": "Retrying request after failure (attempt 0 of 3)",
+  "time": "2025-08-09T17:42:19",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 415,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:N/A duration:4.063s]",
+  "time": "2025-08-09T17:42:23",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 372,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.node_pool",
+  "message": "Node <Urllib3HttpNode(http://localhost:9200)> has failed for 2 times in a row, putting on 2 second timeout",
+  "time": "2025-08-09T17:42:23",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 249,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.transport",
+  "message": "Retrying request after failure (attempt 1 of 3)",
+  "time": "2025-08-09T17:42:23",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 415,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.node_pool",
+  "message": "Resurrected node <Urllib3HttpNode(http://localhost:9200)> (force=False)",
+  "time": "2025-08-09T17:42:23",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 310,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:N/A duration:4.098s]",
+  "time": "2025-08-09T17:42:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 372,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.node_pool",
+  "message": "Node <Urllib3HttpNode(http://localhost:9200)> has failed for 3 times in a row, putting on 4 second timeout",
+  "time": "2025-08-09T17:42:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 249,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.transport",
+  "message": "Retrying request after failure (attempt 2 of 3)",
+  "time": "2025-08-09T17:42:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 415,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.node_pool",
+  "message": "Resurrected node <Urllib3HttpNode(http://localhost:9200)> (force=False)",
+  "time": "2025-08-09T17:42:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 310,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:N/A duration:4.056s]",
+  "time": "2025-08-09T17:42:31",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 372,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "WARNING",
+  "logger": "elastic_transport.node_pool",
+  "message": "Node <Urllib3HttpNode(http://localhost:9200)> has failed for 4 times in a row, putting on 8 second timeout",
+  "time": "2025-08-09T17:42:31",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_node_pool.py",
+  "lineno": 249,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://192.168.0.141:5000",
+  "time": "2025-08-09T17:42:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-09T17:42:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-09T17:42:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "ERROR",
+  "logger": "src.backend.create_app",
+  "message": "Ошибка генерации get_place_info: Using mxfp4 requires Accelerate: `pip install accelerate`",
+  "time": "2025-08-09T17:43:05",
+  "pathname": "D:\\github_projects\\aitravel\\src\\backend\\infrastructure\\services\\ai_service.py",
+  "lineno": 60,
+  "request_id": "9ab7a4a7-ea76-4cd6-8a11-449ec1cc7564",
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.065s]",
+  "time": "2025-08-09T17:43:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://192.168.0.141:5000",
+  "time": "2025-08-09T17:43:34",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-09T17:43:34",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-09T17:43:34",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.008s]",
+  "time": "2025-08-09T17:53:00",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-09T17:53:00",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-09T17:53:00",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-09T17:53:00",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.009s]",
+  "time": "2025-08-09T18:10:50",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://192.168.0.141:5000",
+  "time": "2025-08-09T18:10:51",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-09T18:10:51",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-09T18:10:51",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "ERROR",
+  "logger": "src.backend.create_app",
+  "message": "Ошибка генерации get_place_info: Using mxfp4 requires Accelerate: `pip install accelerate`",
+  "time": "2025-08-09T18:11:13",
+  "pathname": "D:\\github_projects\\aitravel\\src\\backend\\infrastructure\\services\\ai_service.py",
+  "lineno": 60,
+  "request_id": "75ac4cb3-1dfd-4a85-b533-a06e6e90f6cf",
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.008s]",
+  "time": "2025-08-09T18:11:51",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://192.168.0.141:5000",
+  "time": "2025-08-09T18:11:52",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-09T18:11:52",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-09T18:11:52",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.090s]",
+  "time": "2025-08-15T09:07:15",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T09:07:15",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T09:07:15",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T09:07:15",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T09:08:54",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.009s]",
+  "time": "2025-08-15T09:09:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T09:09:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T09:09:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T09:09:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.008s]",
+  "time": "2025-08-15T09:15:33",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T09:15:33",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T09:15:33",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T09:15:33",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.008s]",
+  "time": "2025-08-15T09:18:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T09:18:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T09:18:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T09:18:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}

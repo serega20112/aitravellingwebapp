@@ -14,7 +14,7 @@
     />
     {% block head_extra %}{% endblock %}
   </head>
-  <body>
+  <body class="{% block body_class %}{% endblock %}">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="{{ url_for('map.index') }}"
         >AI Планировщик Путешествий (Google AI)</a
@@ -35,11 +35,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('map.index') }}">Карта</a>
           </li>
-          {% if config.SHOW_LOGS_LINK %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logs.logs_ui') }}">Логи</a>
+            <a class="nav-link" href="{{ url_for('chat.chat_page') }}">Чат с ИИ</a>
           </li>
-          {% endif %}
         </ul>
         <ul class="navbar-nav ml-auto">
           {% if current_user.is_authenticated %}
@@ -71,7 +69,7 @@
       </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="{% if full_width %}container-fluid{% else %}container{% endif %} page-content mt-4">
       {% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %} {% for category, message in messages %}
       <div
