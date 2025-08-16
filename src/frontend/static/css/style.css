@@ -206,6 +206,34 @@ p {
   color: var(--text-primary);
 }
 
+/* --- Modal (Bootstrap) в тёмном стиле --- */
+.modal-content {
+  background: var(--bg-content);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+.modal-header,
+.modal-footer {
+  border-color: var(--border-color);
+}
+.close span { color: var(--text-primary); }
+
+/* --- Формы --- */
+.form-control, .form-select, textarea, input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+  background-color: #1f2530;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+.form-control:focus, .form-select:focus, textarea:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="number"]:focus {
+  background-color: #202737;
+  border-color: var(--accent-purple);
+  box-shadow: none;
+  color: var(--text-primary);
+}
+
+label, .form-label { color: var(--text-secondary); }
+
 /* --- Списки --- */
 .list-group-item {
   background-color: transparent;

@@ -14,7 +14,7 @@ from src.backend.delivery.shemas.place_shemas import LikedPlaceCreateSchema
 from src.backend.domain.exceptions.user_exceptions import UserNotFoundError
 from src.backend.domain.exceptions.place_exceptions import PlaceServiceError
 
-bp = Blueprint("profile_router", __name__)
+bp = Blueprint("profile_router", __name__, url_prefix="/profile")
 
 
 @bp.route("/")
@@ -34,7 +34,7 @@ def user_profile():
         ]
         if any(err in recommendation for err in error_signals):
             flash(
-                "Рекомендации AI могут быть недоступны. Проверьте настройку Google API ключа и работоспособность сервиса.",
+                "Рекомендации ИИ могут быть недоступны. Проверьте наличие HF_TOKEN и работу сервиса ИИ.",
                 "warning",
             )
 
@@ -94,4 +94,4 @@ def like_place_route():
         )
         flash("Произошла непредвиденная ошибка при добавлении места.", "danger")
 
-    return redirect(request.referrer or url_for("profile.user_profile"))
+    return redirect(request.referrer or url_for("profile_router.user_profile"))

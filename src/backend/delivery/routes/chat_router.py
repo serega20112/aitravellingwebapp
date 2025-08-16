@@ -2,6 +2,7 @@
 Маршруты чата с ИИ для туристической тематики.
 """
 from flask import Blueprint, request, jsonify, render_template, current_app
+from flask_login import current_user
 from pydantic import ValidationError
 
 from src.backend.delivery.shemas.chat_shemas import ChatRequest, ClearChatRequest
@@ -28,7 +29,27 @@ def chat_api():
         history = repo.get(req.session_id)
         for m in req.messages:
             history.append({"role": m.role, "content": m.content})
-        answer = ai.chat(history)
+        # Добавляем контекст с понравившимися местами, если пользователь аутентифицирован
+        payload_history = list(history)
+        try:
+            if hasattr(current_user, "is_authenticated") and current_user.is_authenticated:
+                profile_use_case = current_app.extensions["services"]["profile_use_case"]
+                liked_places = profile_use_case.get_liked_places(current_user.id)
+                if liked_places:
+                    liked_str = ", ".join([p.city_name for p in liked_places])
+                    system_context = (
+                        "Контекст пользователя: ему нравятся следующие места: "
+                        + liked_str
+                        + ". Если пользователь просит рекомендации, опирайся на эти предпочтения. "
+                        "Если он уточняет новое направление (например, 'хочу в Сибирь'), подстрой рекомендации под это пожелание, "
+                        "сохраняя логику его предыдущих предпочтений. Отвечай по-русски, кратко и по делу."
+                    )
+                    payload_history = [{"role": "system", "content": system_context}] + payload_history
+        except Exception as _:
+            # Не ломаем чат, если не удалось подгрузить понравившиеся места
+            pass
+
+        answer = ai.chat(payload_history)
         repo.append(req.session_id, "assistant", answer)
         return jsonify({"answer": answer})
     except ValidationError as e:

@@ -128,22 +128,38 @@ def setup_logging(app: Flask) -> None:
 
     # Elasticsearch
     if cfg.get("LOG_TO_ES", False):
-        esh = ElasticsearchHandler(
-            es_host=cfg.get("ELASTICSEARCH_HOST"),
-            index_name=cfg.get("ES_INDEX_NAME", "logs-app"),
-            username=cfg.get("ES_USERNAME"),
-            password=cfg.get("ES_PASSWORD"),
-            verify_certs=bool(cfg.get("ES_VERIFY_CERTS", False)),
-            ca_certs=cfg.get("ES_CA_CERTS"),
-            request_timeout=int(cfg.get("ES_REQUEST_TIMEOUT", 5)),
-            level=getattr(logging, str(cfg.get("LOG_ES_LEVEL", "ERROR")).upper(), logging.ERROR),
-        )
-        esh.addFilter(context_filter)
-        root_logger.addHandler(esh)
-        if not getattr(esh, "enabled", False):
+        es_host = cfg.get("ELASTICSEARCH_HOST")
+        if not es_host:
             logging.getLogger(__name__).warning(
-                "Elasticsearch logging is enabled in config but not active. Check ELASTICSEARCH_HOST and credentials."
+                "LOG_TO_ES=true, но ELASTICSEARCH_HOST не задан — отправка логов в ES отключена"
             )
+            esh = None
+        else:
+            esh = ElasticsearchHandler(
+                es_host=cfg.get("ELASTICSEARCH_HOST"),
+                index_name=cfg.get("ES_INDEX_NAME", "logs-app"),
+                username=cfg.get("ES_USERNAME"),
+                password=cfg.get("ES_PASSWORD"),
+                verify_certs=bool(cfg.get("ES_VERIFY_CERTS", False)),
+                ca_certs=cfg.get("ES_CA_CERTS"),
+                request_timeout=int(cfg.get("ES_REQUEST_TIMEOUT", 5)),
+                level=getattr(logging, str(cfg.get("LOG_ES_LEVEL", "ERROR")).upper(), logging.ERROR),
+            )
+        if esh is not None:
+            esh.addFilter(context_filter)
+            root_logger.addHandler(esh)
+            if getattr(esh, "enabled", False):
+                logging.getLogger(__name__).info(
+                    "Elasticsearch logging ENABLED: host=%s index=%s level=%s",
+                    cfg.get("ELASTICSEARCH_HOST"),
+                    cfg.get("ES_INDEX_NAME", "logs-app"),
+                    getattr(logging, str(cfg.get("LOG_ES_LEVEL", "ERROR")).upper(), logging.ERROR),
+                )
+            else:
+                logging.getLogger(__name__).warning(
+                    "Elasticsearch logging configured but NOT ACTIVE. Проверьте доступность %s, креды и TLS.",
+                    cfg.get("ELASTICSEARCH_HOST"),
+                )
 
     # Access log middleware
     @app.before_request

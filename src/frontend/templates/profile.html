@@ -35,24 +35,22 @@ current_user.username }}{% endblock %} {% block content %}
     <hr />
 
     <div class="mt-4">
-      <h4>Рекомендации по путешествиям от Google AI:</h4>
+      <h4>Рекомендации по путешествиям от ИИ:</h4>
       {% if recommendation %} {% if "AI service is not configured" in
       recommendation or "Could not generate recommendations" in recommendation
       or "Not enough liked places" in recommendation or "Content generation was
       blocked" in recommendation %}
       <div class="alert alert-info">{{ recommendation }}</div>
       {% else %}
-      <div class="card bg-light">
+      <div class="card">
         <div class="card-body">
-          <p class="card-text" style="white-space: pre-wrap">
-            {{ recommendation }}
-          </p>
+          <div class="card-text markdown">{{ recommendation }}</div>
         </div>
       </div>
       {% endif %} {% else %}
       <p>
         Сначала добавьте несколько мест в избранное, чтобы получить персональные
-        рекомендации от Google AI!
+        рекомендации от ИИ!
       </p>
       {% endif %}
     </div>

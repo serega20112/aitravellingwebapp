@@ -6,7 +6,7 @@
 - Виртуальное окружение (рекомендуется): venv/virtualenv/conda/poetry — на ваш выбор
 - Переменные окружения (см. `.env.example`):
   - SECRET_KEY — секрет Flask
-  - GOOGLE_API_KEY — если используете google-generativeai
+  - HF_TOKEN — токен доступа Hugging Face Inference API
 
 ## 1. Клонирование и создание окружения
 ```

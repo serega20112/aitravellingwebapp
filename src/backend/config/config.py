@@ -42,7 +42,14 @@ class Config:
     ES_CA_CERTS: str | None = os.getenv("ES_CA_CERTS")
     ES_REQUEST_TIMEOUT: int = int(os.getenv("ES_REQUEST_TIMEOUT", "5"))
 
-    GOOGLE_API_KEY: str = os.getenv("GOOGLE_API_KEY")
+    # OpenStreetMap Nominatim settings
+    NOMINATIM_BASE_URL: str = os.getenv(
+        "NOMINATIM_BASE_URL", "https://nominatim.openstreetmap.org"
+    )
+    NOMINATIM_USER_AGENT: str = os.getenv(
+        "NOMINATIM_USER_AGENT", "aitravel-app/1.0"
+    )
+    NOMINATIM_EMAIL: str | None = os.getenv("NOMINATIM_EMAIL")
 
     # Feature flags / visibility
     SHOW_LOGS_LINK: bool = os.getenv("SHOW_LOGS_LINK", "false").lower() == "true"

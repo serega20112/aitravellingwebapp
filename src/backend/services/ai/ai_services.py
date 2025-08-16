@@ -1,12 +1,13 @@
+import logging
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
-from flask import current_app
 
 from src.backend.infrastructure.client.init_model.ai_config import MODEL_CONFIG
 
 
 class AIService:
-    def __init__(self):
+    def __init__(self, logger: logging.Logger | None = None):
+        self._logger = logger or logging.getLogger(__name__)
         model_path = MODEL_CONFIG["model_path"]
         self.device = "cuda" if torch.cuda.is_available() else "cuda"
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
@@ -39,11 +40,11 @@ class AIService:
         try:
             response_text = self._generate(prompt)
             if not response_text:
-                current_app.logger.warning("Пустой ответ от модели на get_place_info.")
+                self._logger.warning("Пустой ответ от модели на get_place_info.")
                 return "Не удалось получить информацию: пустой ответ модели."
             return response_text
         except Exception as e:
-            current_app.logger.error(f"Ошибка генерации get_place_info: {e}", exc_info=True)
+            self._logger.error(f"Ошибка генерации get_place_info: {e}", exc_info=True)
             return f"Ошибка сервиса ИИ: {str(e)}"
 
     def get_travel_recommendation(self, liked_places_str: str) -> str:
@@ -55,9 +56,9 @@ class AIService:
         try:
             response_text = self._generate(prompt)
             if not response_text:
-                current_app.logger.warning("Пустой ответ от модели на get_travel_recommendation.")
+                self._logger.warning("Пустой ответ от модели на get_travel_recommendation.")
                 return "Не удалось получить рекомендации: пустой ответ модели."
             return response_text
         except Exception as e:
-            current_app.logger.error(f"Ошибка генерации get_travel_recommendation: {e}", exc_info=True)
+            self._logger.error(f"Ошибка генерации get_travel_recommendation: {e}", exc_info=True)
             return f"Ошибка сервиса ИИ: {str(e)}"

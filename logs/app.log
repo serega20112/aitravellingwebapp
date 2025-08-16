@@ -2657,3 +2657,773 @@
   "request_id": null,
   "user_id": null
 }
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.065s]",
+  "time": "2025-08-15T16:35:05",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T16:35:06",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T16:35:06",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:35:06",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:37:58",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.008s]",
+  "time": "2025-08-15T16:38:30",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T16:38:30",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T16:38:30",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:38:30",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.009s]",
+  "time": "2025-08-15T16:42:37",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T16:42:37",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T16:42:37",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:42:37",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:47:53",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.009s]",
+  "time": "2025-08-15T16:48:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T16:48:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T16:48:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:48:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.007s]",
+  "time": "2025-08-15T16:48:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T16:48:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T16:48:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:48:27",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:50:15",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:50:15",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:52:16",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:52:16",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:53:42",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:53:42",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:54:55",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:54:55",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.009s]",
+  "time": "2025-08-15T16:55:18",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-15T16:55:18",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-15T16:55:18",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-15T16:55:18",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "ERROR",
+  "logger": "src.backend.create_app",
+  "message": "Œ¯Ë·Í‡ Nominatim reverse: HTTPSConnectionPool(host='nominatim.openstreetmap.org', port=443): Max retries exceeded with url: /reverse?format=jsonv2&lat=56.126834&lon=40.397113&addressdetails=1&accept-language=ru&email=serega20112356%40gmail.com (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x0000028C9FC25AC0>: Failed to resolve 'nominatim.openstreetmap.org' ([Errno 11001] getaddrinfo failed)\"))",
+  "time": "2025-08-15T16:56:00",
+  "pathname": "D:\\github_projects\\aitravel\\src\\backend\\infrastructure\\services\\geocoding_service.py",
+  "lineno": 55,
+  "request_id": "74659c3b-b38d-4c1e-b553-75d418760bc4",
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.070s]",
+  "time": "2025-08-16T09:10:30",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-16T09:10:30",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-16T09:10:30",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:10:30",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.008s]",
+  "time": "2025-08-16T09:27:05",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-16T09:27:06",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-16T09:27:06",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:27:06",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:28:59",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.008s]",
+  "time": "2025-08-16T09:29:21",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-16T09:29:21",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-16T09:29:21",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:29:21",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:35:53",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:36:20",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:36:35",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:38:20",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:39:29",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:40:02",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:40:32",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:44:04",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.009s]",
+  "time": "2025-08-16T09:44:54",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-16T09:44:54",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-16T09:44:54",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T09:44:54",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T10:12:41",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.009s]",
+  "time": "2025-08-16T10:18:24",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-16T10:18:24",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-16T10:18:24",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T10:18:24",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.010s]",
+  "time": "2025-08-16T10:23:46",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-16T10:23:46",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-16T10:23:46",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T10:23:46",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.008s]",
+  "time": "2025-08-16T10:23:46",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-16T10:23:46",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-16T10:23:46",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T10:23:46",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "elastic_transport.transport",
+  "message": "GET http://localhost:9200/ [status:200 duration:0.009s]",
+  "time": "2025-08-16T10:23:53",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\elastic_transport\\_transport.py",
+  "lineno": 349,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://10.255.0.1:5000",
+  "time": "2025-08-16T10:23:53",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m",
+  "time": "2025-08-16T10:23:53",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}
+{
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat",
+  "time": "2025-08-16T10:23:53",
+  "pathname": "D:\\github_projects\\aitravel\\.venv\\Lib\\site-packages\\werkzeug\\_internal.py",
+  "lineno": 97,
+  "request_id": null,
+  "user_id": null
+}

@@ -1,5 +1,6 @@
 import os
-from flask import Flask
+import time
+from flask import Flask, request, g
 from flask_login import LoginManager
 from dotenv import load_dotenv
 
@@ -8,6 +9,7 @@ from src.backend.delivery.routes import auth_router, map_router, profile_router
 from src.backend.delivery.routes import chat_router
 from src.backend.delivery.routes import logs_router
 from src.backend.infrastructure.services.ai_service import AIService
+from src.backend.infrastructure.services.geocoding_service import GeocodingService
 from src.backend.infrastructure.db.uow import SqlAlchemyUnitOfWork
 from src.backend.use_case.place.place_use_case import PlaceUseCase
 from src.backend.services.place.place_service import PlaceService
@@ -43,6 +45,34 @@ def create_app(config_class=None):
 
     # Инициализация логирования (консоль/файл/Elasticsearch + middleware)
     setup_logging(app)
+
+    # Простейший security-middleware: логируем IP, метод, путь, UA и длительность запроса
+    @app.before_request
+    def _start_timer():
+        g._req_start = time.perf_counter()
+
+    @app.after_request
+    def _log_request_info(response):
+        try:
+            duration_ms = None
+            if hasattr(g, "_req_start"):
+                duration_ms = round((time.perf_counter() - g._req_start) * 1000, 2)
+            # если есть прокси — берём первый IP из X-Forwarded-For
+            forwarded_for = request.headers.get("X-Forwarded-For")
+            ip = forwarded_for.split(",")[0].strip() if forwarded_for else request.remote_addr
+            ua = request.headers.get("User-Agent", "-")
+            app.logger.info(
+                "SECURITY: %s %s -> %s | ip=%s | ua=%s | t=%sms",
+                request.method,
+                request.path,
+                response.status_code,
+                ip,
+                ua,
+                duration_ms if duration_ms is not None else "-",
+            )
+        except Exception:
+            app.logger.exception("Security logging failed")
+        return response
 
     # Неболтливые стартовые сообщения (без секретов)
     print("Templates folder:", base_dir)
@@ -91,9 +121,17 @@ def create_app(config_class=None):
 
     # Композиция зависимостей приложения (DI)
     # Общий AI сервис (тяжёлый объект) создаём один раз и переиспользуем
-    ai_service = AIService()
+    ai_service = AIService(config=app.config, logger=app.logger)
     app.extensions.setdefault("services", {})
     app.extensions["services"]["ai_service"] = ai_service
+    # Geocoding (OSM Nominatim) — создаём из app.config, без current_app
+    cfg = app.config
+    app.extensions["services"]["geocoding_service"] = GeocodingService(
+        base_url=cfg.get("NOMINATIM_BASE_URL", "https://nominatim.openstreetmap.org"),
+        user_agent=cfg.get("NOMINATIM_USER_AGENT", "aitravel-app/1.0"),
+        email=cfg.get("NOMINATIM_EMAIL"),
+        logger=app.logger,
+    )
     app.extensions["services"]["chat_repo"] = ChatMemoryRepository(max_messages=30)
     # PlaceService на базе UoW и AI
     app.extensions["services"]["place_service"] = PlaceService(
