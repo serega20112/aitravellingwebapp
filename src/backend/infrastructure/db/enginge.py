@@ -1,3 +1,5 @@
+"""Создание engine и фабрики сессий SQLAlchemy (простая обёртка)."""
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 

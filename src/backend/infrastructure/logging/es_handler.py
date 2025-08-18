@@ -1,5 +1,12 @@
+"""Обработчик логов для отправки событий в Elasticsearch.
+
+Модуль предоставляет класс `ElasticsearchHandler`, который публикует записи
+логирования в индекс Elasticsearch и безопасно деградирует при недоступности
+ES, не ломая основное приложение.
+"""
+
 from __future__ import annotations
-import json
+
 import logging
 import socket
 from datetime import datetime
@@ -13,9 +20,10 @@ except Exception:  # pragma: no cover
 
 
 class ElasticsearchHandler(logging.Handler):
-    """
-    Логгер-обработчик, отправляющий записи в Elasticsearch индекс.
-    Безопасно деградирует, если клиент недоступен.
+    """Обработчик логов для отправки событий в Elasticsearch.
+
+    Безопасно деградирует, если клиент недоступен: в этом случае записи
+    не отправляются, но приложение продолжает работать.
     """
 
     def __init__(
@@ -29,6 +37,11 @@ class ElasticsearchHandler(logging.Handler):
         request_timeout: int = 5,
         level: int = logging.INFO,
     ) -> None:
+        """Создать обработчик Elasticsearch.
+
+        Параметры соответствуют настройкам клиента Elasticsearch. При ошибке
+        инициализации обработчик отключается (``enabled = False``).
+        """
         super().__init__(level)
         self.index_name = index_name
         self.hostname = socket.gethostname()
@@ -39,7 +52,10 @@ class ElasticsearchHandler(logging.Handler):
             return
 
         try:
-            kwargs: dict[str, Any] = {"hosts": [es_host], "request_timeout": request_timeout}
+            kwargs: dict[str, Any] = {
+                "hosts": [es_host],
+                "request_timeout": request_timeout,
+            }
             # TLS options
             if es_host.startswith("https://"):
                 kwargs["verify_certs"] = verify_certs
@@ -57,6 +73,11 @@ class ElasticsearchHandler(logging.Handler):
             self._es = None
 
     def emit(self, record: logging.LogRecord) -> None:  # pragma: no cover - IO bound
+        """Отправить запись логирования в Elasticsearch.
+
+        При отключённом обработчике (``enabled = False``) ничего не делает.
+        Ошибки отправки проглатываются, чтобы не ломать приложение.
+        """
         if not self.enabled or self._es is None:
             return
         try:
@@ -67,7 +88,7 @@ class ElasticsearchHandler(logging.Handler):
             pass
 
     def _serialize(self, record: logging.LogRecord) -> dict[str, Any]:
-        # Преобразуем LogRecord в JSON-документ
+        """Преобразовать ``LogRecord`` в JSON-документ для ES."""
         return {
             "@timestamp": datetime.utcfromtimestamp(record.created).isoformat() + "Z",
             "level": record.levelname,

@@ -1,5 +1,9 @@
+"""Создание SQLAlchemy engine и фабрики сессий для приложения."""
+
+from typing import Generator
+
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import Session, declarative_base, sessionmaker
 
 from src.backend.config.config import Config
 
@@ -24,10 +28,8 @@ Base = declarative_base()
 
 
 # Управление сессией через генератор
-def get_db_session():
-    """
-    Генератор сессий. Используется как зависимость.
-    """
+def get_db_session() -> Generator[Session, None, None]:
+    """Генератор сессий. Используется как зависимость."""
     session = SessionLocal(bind=engine)
     try:
         yield session

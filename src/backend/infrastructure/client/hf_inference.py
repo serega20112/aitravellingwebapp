@@ -1,8 +1,11 @@
 """
 Клиент Hugging Face Inference API.
+
 Инкапсулирует инициализацию клиента на основе переданной конфигурации.
 """
+
 from typing import Optional
+
 from huggingface_hub import InferenceClient
 
 

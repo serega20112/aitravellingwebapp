@@ -1,1 +1,3 @@
-from src.backend.repository.place.sqlalchemy_place_repository import SqlAlchemyPlaceRepository
+"""Алиасы для репозитория мест (SQLAlchemy)."""
+
+from ....repository.place.sqlalchemy_place_repository import SqlAlchemyPlaceRepository

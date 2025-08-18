@@ -1,7 +1,7 @@
-"""
-Маршруты чата с ИИ для туристической тематики.
-"""
-from flask import Blueprint, request, jsonify, render_template, current_app
+"""Маршруты чата с ИИ для туристической тематики."""
+
+from flask import Blueprint, current_app, jsonify, render_template, request
+from flask.typing import ResponseReturnValue
 from flask_login import current_user
 from pydantic import ValidationError
 
@@ -11,13 +11,13 @@ bp = Blueprint("chat", __name__)
 
 
 @bp.route("/chat", methods=["GET"])
-def chat_page():
+def chat_page() -> ResponseReturnValue:
     """Возвращает страницу веб-чата с ИИ."""
     return render_template("chat.html")
 
 
 @bp.route("/api/chat", methods=["POST"])
-def chat_api():
+def chat_api() -> ResponseReturnValue:
     """Обрабатывает запрос чата, валидирует вход и возвращает ответ ассистента."""
     try:
         data = request.get_json()
@@ -32,8 +32,13 @@ def chat_api():
         # Добавляем контекст с понравившимися местами, если пользователь аутентифицирован
         payload_history = list(history)
         try:
-            if hasattr(current_user, "is_authenticated") and current_user.is_authenticated:
-                profile_use_case = current_app.extensions["services"]["profile_use_case"]
+            if (
+                hasattr(current_user, "is_authenticated")
+                and current_user.is_authenticated
+            ):
+                profile_use_case = current_app.extensions["services"][
+                    "profile_use_case"
+                ]
                 liked_places = profile_use_case.get_liked_places(current_user.id)
                 if liked_places:
                     liked_str = ", ".join([p.city_name for p in liked_places])
@@ -44,8 +49,10 @@ def chat_api():
                         "Если он уточняет новое направление (например, 'хочу в Сибирь'), подстрой рекомендации под это пожелание, "
                         "сохраняя логику его предыдущих предпочтений. Отвечай по-русски, кратко и по делу."
                     )
-                    payload_history = [{"role": "system", "content": system_context}] + payload_history
-        except Exception as _:
+                    payload_history = [
+                        {"role": "system", "content": system_context}
+                    ] + payload_history
+        except Exception:
             # Не ломаем чат, если не удалось подгрузить понравившиеся места
             pass
 
@@ -60,7 +67,7 @@ def chat_api():
 
 
 @bp.route("/api/chat/clear", methods=["POST"])
-def chat_clear():
+def chat_clear() -> ResponseReturnValue:
     """Очищает историю сообщений указанной сессии."""
     try:
         data = request.get_json()

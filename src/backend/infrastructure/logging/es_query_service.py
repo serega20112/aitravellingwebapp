@@ -1,5 +1,11 @@
+"""Сервис для поиска логов в Elasticsearch.
+
+Класс `ElasticsearchLogService` выполняет параметризованные запросы к индексу
+логов в Elasticsearch и возвращает агрегированный результат для отображения.
+"""
+
 from __future__ import annotations
-from datetime import datetime
+
 from typing import Any, Optional
 
 try:
@@ -9,6 +15,8 @@ except Exception:  # pragma: no cover
 
 
 class ElasticsearchLogService:
+    """Сервис для запросов к индексу логов в Elasticsearch."""
+
     def __init__(
         self,
         host: str,
@@ -19,13 +27,21 @@ class ElasticsearchLogService:
         ca_certs: Optional[str] = None,
         request_timeout: int = 5,
     ) -> None:
+        """Инициализировать клиент поиска логов.
+
+        Поддерживает HTTP(S), базовую аутентификацию и проверку сертификатов.
+        При ошибке инициализации переключается в отключённый режим.
+        """
         self.index = index_name
         self.enabled = False
         self._es: Optional[Elasticsearch] = None
         if Elasticsearch is None:
             return
         try:
-            kwargs: dict[str, Any] = {"hosts": [host], "request_timeout": request_timeout}
+            kwargs: dict[str, Any] = {
+                "hosts": [host],
+                "request_timeout": request_timeout,
+            }
             if host.startswith("https://"):
                 kwargs["verify_certs"] = verify_certs
                 if ca_certs:
@@ -48,6 +64,10 @@ class ElasticsearchLogService:
         size: int = 50,
         page: int = 0,
     ) -> dict[str, Any]:  # pragma: no cover - IO
+        """Выполнить поиск логов по фильтрам и пагинации.
+
+        Возвращает словарь с полями ``total`` и ``hits``.
+        """
         if not self.enabled or self._es is None:
             return {"total": 0, "hits": []}
 

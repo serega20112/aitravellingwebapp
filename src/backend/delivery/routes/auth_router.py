@@ -1,16 +1,25 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required, current_user
+"""Маршруты аутентификации пользователей (регистрация/вход/выход)."""
+
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask.typing import ResponseReturnValue
+from flask_login import current_user, login_required, login_user, logout_user
 from pydantic import ValidationError
 
 from src.backend.delivery.shemas.user_shemas import UserCreateSchema
-from src.backend.domain.exceptions.user_exceptions import UserAlreadyExistsError, UserNotFoundError, InvalidCredentials
+from src.backend.domain.exceptions.user_exceptions import (
+    InvalidCredentials,
+    UserAlreadyExistsError,
+    UserNotFoundError,
+)
 from src.backend.services.user.user_service import UserService
 
 auth_router = Blueprint("auth_router", __name__, url_prefix="/auth")
 user_service = UserService()  # Используем UserService вместо UserUseCase
 
+
 @auth_router.route("/register", methods=["GET", "POST"])
-def register():
+def register() -> ResponseReturnValue:
+    """Страница регистрации и обработка отправленной формы."""
     if current_user.is_authenticated:
         return redirect(url_for("map.index"))
 
@@ -36,7 +45,8 @@ def register():
 
 
 @auth_router.route("/login", methods=["GET", "POST"])
-def login():
+def login() -> ResponseReturnValue:
+    """Страница входа и обработка логина пользователя."""
     if current_user.is_authenticated:
         return redirect(url_for("map.index"))
 
@@ -65,7 +75,8 @@ def login():
 
 @auth_router.route("/logout")
 @login_required
-def logout():
+def logout() -> ResponseReturnValue:
+    """Выйти из аккаунта и перенаправить на страницу входа."""
     logout_user()
     flash("Вы вышли из системы.", "info")
     return redirect(url_for("auth_router.login"))

@@ -1,7 +1,10 @@
+"""Конфигурация приложения и загрузка переменных окружения."""
+
 import os
 from dataclasses import dataclass
-from dotenv import load_dotenv
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=Path(__file__).parent.parent.parent / ".env")
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -9,6 +12,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 @dataclass
 class Config:
+    """Базовая конфигурация для Flask-приложения."""
+
     SECRET_KEY: str = os.getenv("SECRET_KEY", "default_secret")
 
     SQLALCHEMY_DATABASE_URI: str = os.getenv(
@@ -19,7 +24,7 @@ class Config:
     )
 
     # Logging configuration
-    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
+    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "ERROR")
     LOG_FILE: str = os.getenv("LOG_FILE", "logs/app.log")
     LOG_TO_CONSOLE: bool = os.getenv("LOG_TO_CONSOLE", "true").lower() == "true"
     LOG_TO_FILE: bool = os.getenv("LOG_TO_FILE", "true").lower() == "true"
@@ -27,7 +32,9 @@ class Config:
     LOG_MAX_BYTES: int = int(os.getenv("LOG_MAX_BYTES", "10485760"))  # 10MB
     LOG_BACKUP_COUNT: int = int(os.getenv("LOG_BACKUP_COUNT", "5"))
     LOG_PRETTY_JSON: bool = os.getenv("LOG_PRETTY_JSON", "true").lower() == "true"
-    LOG_ERRORS_PER_FILE: bool = os.getenv("LOG_ERRORS_PER_FILE", "true").lower() == "true"
+    LOG_ERRORS_PER_FILE: bool = (
+        os.getenv("LOG_ERRORS_PER_FILE", "true").lower() == "true"
+    )
     LOG_ERRORS_DIR: str = os.getenv("LOG_ERRORS_DIR", "logs/errors")
     LOG_CONSOLE_LEVEL: str = os.getenv("LOG_CONSOLE_LEVEL", LOG_LEVEL)
     LOG_FILE_LEVEL: str = os.getenv("LOG_FILE_LEVEL", LOG_LEVEL)
@@ -46,9 +53,7 @@ class Config:
     NOMINATIM_BASE_URL: str = os.getenv(
         "NOMINATIM_BASE_URL", "https://nominatim.openstreetmap.org"
     )
-    NOMINATIM_USER_AGENT: str = os.getenv(
-        "NOMINATIM_USER_AGENT", "aitravel-app/1.0"
-    )
+    NOMINATIM_USER_AGENT: str = os.getenv("NOMINATIM_USER_AGENT", "aitravel-app/1.0")
     NOMINATIM_EMAIL: str | None = os.getenv("NOMINATIM_EMAIL")
 
     # Feature flags / visibility

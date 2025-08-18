@@ -1,3 +1,5 @@
-# use_case/__init__.py
+"""Use case layer for business logic implementation.
 
-# Application-level logic
+This package contains all use cases (application services) that implement
+the core business logic of the AI Travel application following DDD principles.
+"""

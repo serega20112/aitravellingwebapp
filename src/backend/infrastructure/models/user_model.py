@@ -1,11 +1,15 @@
+"""SQLAlchemy-модель пользователя приложения."""
+
+from flask_login import UserMixin
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
 from src.backend.infrastructure.db.Base import Base
-from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String
 
 
 class User(UserMixin, Base):
+    """Таблица ``users`` с отношением к понравившимся местам."""
+
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
@@ -16,10 +20,12 @@ class User(UserMixin, Base):
         "LikedPlace", backref="user", lazy=True, cascade="all, delete-orphan"
     )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Строковое представление пользователя."""
         return f"<User {self.username}>"
 
     def check_password(self, plain_password: str) -> bool:
+        """Проверить пароль пользователя по хэшу."""
         from src.backend.utils.security.password_utils import verify_password
 
         return verify_password(plain_password, self.password_hash)

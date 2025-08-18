@@ -1,1 +1,3 @@
-from src.backend.repository.user.sqlalchemy_user_repository import SqlAlchemyUserRepository
+"""Алиасы для репозитория пользователей (SQLAlchemy)."""
+
+from ....repository.user.sqlalchemy_user_repository import SqlAlchemyUserRepository

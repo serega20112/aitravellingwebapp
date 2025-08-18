@@ -37,7 +37,7 @@ class DummyUoW:
 
 def make_user_repo(existing_user: bool = True):
     repo = SimpleNamespace()
-    repo.find_by_id = (lambda uid: SimpleNamespace(id=uid) if existing_user else None)
+    repo.find_by_id = lambda uid: SimpleNamespace(id=uid) if existing_user else None
     return repo
 
 

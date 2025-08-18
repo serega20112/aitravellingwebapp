@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, request, jsonify, current_app, flash
+"""Маршруты карты и геокодинга."""
+
+from flask import Blueprint, current_app, flash, jsonify, render_template, request
+from flask.typing import ResponseReturnValue
 from flask_login import current_user
 from pydantic import ValidationError
 
@@ -6,12 +9,10 @@ from src.backend.delivery.shemas.place_shemas import PointInfoRequestSchema
 
 bp = Blueprint("map", __name__)
 
+
 @bp.route("/")
-def index():
-    """
-    Главная страница с картой. Проверяется настройка ИИ‑сервиса по токену
-    Hugging Face (HF_TOKEN) в конфигурации приложения.
-    """
+def index() -> ResponseReturnValue:
+    """Главная страница с картой."""
     hf_token = current_app.config.get("HF_TOKEN")
     ai_service_configured = bool(hf_token)
     if not ai_service_configured:
@@ -20,7 +21,7 @@ def index():
 
 
 @bp.route("/get_location_info", methods=["POST"])
-def get_location_info_route():
+def get_location_info_route() -> ResponseReturnValue:
     """
     Возвращает краткое описание точки по координатам.
 
@@ -61,7 +62,7 @@ def get_location_info_route():
 
 
 @bp.route("/reverse_geocode", methods=["POST"])
-def reverse_geocode_route():
+def reverse_geocode_route() -> ResponseReturnValue:
     """
     Реверс‑геокодинг с ИИ‑описанием.
 
@@ -95,7 +96,10 @@ def reverse_geocode_route():
         if ai_service is not None:
             liked_str = None
             try:
-                if hasattr(current_user, "is_authenticated") and current_user.is_authenticated:
+                if (
+                    hasattr(current_user, "is_authenticated")
+                    and current_user.is_authenticated
+                ):
                     profile_use_case = services.get("profile_use_case")
                     if profile_use_case:
                         liked = profile_use_case.get_liked_places(current_user.id)
@@ -139,7 +143,7 @@ def reverse_geocode_route():
 
 
 @bp.route("/geocode_query", methods=["POST"])
-def geocode_query_route():
+def geocode_query_route() -> ResponseReturnValue:
     """
     Поиск по текстовому запросу с нормализацией через ИИ и описанием места.
 
@@ -165,7 +169,10 @@ def geocode_query_route():
         geocoder = services.get("geocoding_service")
         ai_service = services.get("ai_service")
         if geocoder is None or ai_service is None:
-            return jsonify({"error": "Сервисы геокодинга или ИИ не сконфигурированы"}), 503
+            return (
+                jsonify({"error": "Сервисы геокодинга или ИИ не сконфигурированы"}),
+                503,
+            )
 
         normalized = None
         try:
@@ -183,7 +190,10 @@ def geocode_query_route():
 
         liked_str = None
         try:
-            if hasattr(current_user, "is_authenticated") and current_user.is_authenticated:
+            if (
+                hasattr(current_user, "is_authenticated")
+                and current_user.is_authenticated
+            ):
                 profile_use_case = services.get("profile_use_case")
                 if profile_use_case:
                     liked = profile_use_case.get_liked_places(current_user.id)

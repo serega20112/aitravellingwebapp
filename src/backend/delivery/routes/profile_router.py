@@ -1,25 +1,29 @@
+"""Маршруты профиля пользователя."""
+
 from flask import (
     Blueprint,
+    current_app,
+    flash,
+    redirect,
     render_template,
     request,
-    redirect,
     url_for,
-    flash,
-    current_app,
 )
-from flask_login import login_required, current_user
+from flask.typing import ResponseReturnValue
+from flask_login import current_user, login_required
 from pydantic import ValidationError
 
 from src.backend.delivery.shemas.place_shemas import LikedPlaceCreateSchema
-from src.backend.domain.exceptions.user_exceptions import UserNotFoundError
 from src.backend.domain.exceptions.place_exceptions import PlaceServiceError
+from src.backend.domain.exceptions.user_exceptions import UserNotFoundError
 
 bp = Blueprint("profile_router", __name__, url_prefix="/profile")
 
 
 @bp.route("/")
 @login_required
-def user_profile():
+def user_profile() -> ResponseReturnValue:
+    """Страница профиля пользователя."""
     liked_places = []
     recommendation = "Не удалось получить рекомендации."
     try:
@@ -52,7 +56,8 @@ def user_profile():
 
 @bp.route("/like_place", methods=["POST"])
 @login_required
-def like_place_route():
+def like_place_route() -> ResponseReturnValue:
+    """Обработчик добавления любимого места пользователем."""
     try:
         form_data = request.form
         if not all(k in form_data for k in ["city_name", "latitude", "longitude"]):

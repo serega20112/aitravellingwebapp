@@ -1,32 +1,36 @@
-from __future__ import annotations
-from abc import ABC, abstractmethod
-from typing import Protocol
+"""Порт Unit of Work для доменного слоя."""
 
-from src.backend.domain.repositories.place.place_repository import PlaceRepository
-from src.backend.domain.repositories.user.user_repository import UserRepository
+from __future__ import annotations
+
+from abc import ABC, abstractmethod
 
 
 class IUnitOfWork(ABC):
     """Порт Unit of Work. Управляет транзакцией и предоставляет репозитории.
+
     Реализации находятся во внешних слоях (infrastructure/db).
     """
 
     # Репозитории, работающие внутри текущей транзакции
-    place_repo: PlaceRepository
-    user_repo: UserRepository
 
     @abstractmethod
-    def commit(self) -> None:  # завершить транзакцию
+    def commit(self) -> None:
+        """Завершить транзакцию."""
         raise NotImplementedError
 
     @abstractmethod
-    def rollback(self) -> None:  # откатить транзакцию
+    def rollback(self) -> None:
+        """Откатить транзакцию."""
         raise NotImplementedError
 
     def __enter__(self) -> IUnitOfWork:
+        """Войти в контекст Unit of Work."""
         return self
 
-    def __exit__(self, exc_type, exc, tb) -> None:
+    def __exit__(
+        self, exc_type: type | None, exc: Exception | None, tb: object
+    ) -> None:
+        """Выйти из контекста Unit of Work с автоматическим commit/rollback."""
         if exc:
             self.rollback()
         else:

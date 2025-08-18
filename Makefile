@@ -33,7 +33,7 @@ lint:
 
 	@echo "Check flake8"
 	flake8 src/
-
+		
 #	echo "Run mypy for typing"
 #	mypy src/ --strict
 

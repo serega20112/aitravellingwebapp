@@ -1,9 +1,13 @@
+"""Инициализация клиента ИИ, обёртка над локальным GPTOSSClient."""
+
 import logging
+
 from src.backend.infrastructure.client.init_model.ai_config import MODEL_CONFIG
 from src.backend.infrastructure.client.load_model import GPTOSSClient
 
 
-def get_ai_client(logger: logging.Logger | None = None):
+def get_ai_client(logger: logging.Logger | None = None) -> GPTOSSClient:
+    """Создать и вернуть клиент ИИ на основе настройки MODEL_CONFIG."""
     logger = logger or logging.getLogger(__name__)
     try:
         logger.info(f"Initializing AI client with model: {MODEL_CONFIG['model_path']}")

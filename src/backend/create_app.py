@@ -1,27 +1,35 @@
+"""Фабрика Flask-приложения и регистрация зависимостей/маршрутов."""
+
 import os
 import time
-from flask import Flask, request, g
-from flask_login import LoginManager
+
 from dotenv import load_dotenv
+from flask import Flask, Response, g, request
+from flask_login import LoginManager
 
 from src.backend.config import _config
-from src.backend.delivery.routes import auth_router, map_router, profile_router
-from src.backend.delivery.routes import chat_router
-from src.backend.delivery.routes import logs_router
-from src.backend.infrastructure.services.ai_service import AIService
-from src.backend.infrastructure.services.geocoding_service import GeocodingService
+from src.backend.delivery.routes import (
+    auth_router,
+    chat_router,
+    logs_router,
+    map_router,
+    profile_router,
+)
 from src.backend.infrastructure.db.uow import SqlAlchemyUnitOfWork
-from src.backend.use_case.place.place_use_case import PlaceUseCase
-from src.backend.services.place.place_service import PlaceService
-from src.backend.use_case.user.profile_use_case import ProfileUseCase
-from src.backend.utils.logging_setup import setup_logging
 from src.backend.infrastructure.logging.es_query_service import (
     ElasticsearchLogService,
 )
+from src.backend.infrastructure.services.ai_service import AIService
+from src.backend.infrastructure.services.geocoding_service import GeocodingService
 from src.backend.repository.chat.memory_chat_repository import ChatMemoryRepository
+from src.backend.services.place.place_service import PlaceService
+from src.backend.use_case.place.place_use_case import PlaceUseCase
+from src.backend.use_case.user.profile_use_case import ProfileUseCase
+from src.backend.utils.logging_setup import setup_logging
 
 
-def create_app(config_class=None):
+def create_app(config_class: object | None = None) -> Flask:
+    """Создать и сконфигурировать Flask-приложение."""
     load_dotenv()
 
     base_dir = os.path.abspath(
@@ -48,18 +56,24 @@ def create_app(config_class=None):
 
     # Простейший security-middleware: логируем IP, метод, путь, UA и длительность запроса
     @app.before_request
-    def _start_timer():
+    def _start_timer() -> None:
+        """Запомнить время начала запроса для последующего логирования."""
         g._req_start = time.perf_counter()
 
     @app.after_request
-    def _log_request_info(response):
+    def _log_request_info(response: Response) -> Response:
+        """Логировать краткую информацию о запросе/ответе."""
         try:
             duration_ms = None
             if hasattr(g, "_req_start"):
                 duration_ms = round((time.perf_counter() - g._req_start) * 1000, 2)
             # если есть прокси — берём первый IP из X-Forwarded-For
             forwarded_for = request.headers.get("X-Forwarded-For")
-            ip = forwarded_for.split(",")[0].strip() if forwarded_for else request.remote_addr
+            ip = (
+                forwarded_for.split(",")[0].strip()
+                if forwarded_for
+                else request.remote_addr
+            )
             ua = request.headers.get("User-Agent", "-")
             app.logger.info(
                 "SECURITY: %s %s -> %s | ip=%s | ua=%s | t=%sms",
@@ -96,13 +110,13 @@ def create_app(config_class=None):
     login_manager.init_app(app)
 
     @login_manager.user_loader
-    def load_user(user_id):
+    def load_user(user_id: str) -> object | None:
+        """Загрузить пользователя по идентификатору для flask-login."""
+        # Создаём отдельную сессию для загрузки пользователя (вне UoW)
+        from src.backend.infrastructure.db.session import SessionLocal
         from src.backend.repository.user.sqlalchemy_user_repository import (
             SqlAlchemyUserRepository,
         )
-
-        # Создаём отдельную сессию для загрузки пользователя (вне UoW)
-        from src.backend.infrastructure.db.session import SessionLocal
 
         session = SessionLocal()
         try:

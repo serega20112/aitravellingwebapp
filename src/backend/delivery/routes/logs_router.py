@@ -1,5 +1,9 @@
+"""Маршруты для просмотра и поиска логов (для разработки)."""
+
 from __future__ import annotations
-from flask import Blueprint, render_template, request, jsonify, current_app, abort
+
+from flask import Blueprint, abort, current_app, jsonify, render_template, request
+from flask.typing import ResponseReturnValue
 from flask_login import login_required
 from werkzeug.exceptions import BadRequest
 
@@ -7,7 +11,8 @@ bp = Blueprint("logs", __name__, url_prefix="/logs")
 
 
 @bp.before_request
-def _restrict_logs():
+def _restrict_logs() -> None:
+    """Ограничить доступ к логам, если это не разрешено конфигом."""
     # Доступ только если явно включено в конфиге (для разработчиков)
     if not current_app.config.get("SHOW_LOGS_LINK", False):
         abort(404)
@@ -15,13 +20,15 @@ def _restrict_logs():
 
 @bp.route("/", methods=["GET"])  # UI
 @login_required
-def logs_ui():
+def logs_ui() -> ResponseReturnValue:
+    """Вернуть HTML-страницу с интерфейсом просмотра логов."""
     return render_template("logs.html")
 
 
 @bp.route("/api/search", methods=["GET"])  # API
 @login_required
-def logs_search_api():
+def logs_search_api() -> ResponseReturnValue:
+    """Выполнить поиск логов по параметрам запроса и вернуть JSON."""
     query = request.args.get("q")
     level = request.args.get("level")
     from_ts = request.args.get("from")
@@ -34,7 +41,9 @@ def logs_search_api():
 
     log_service = current_app.extensions.get("services", {}).get("log_service")
     if log_service is None or not getattr(log_service, "enabled", False):
-        return jsonify({"total": 0, "hits": [], "note": "Elasticsearch недоступен или не настроен"})
+        return jsonify(
+            {"total": 0, "hits": [], "note": "Elasticsearch недоступен или не настроен"}
+        )
 
     data = log_service.search_logs(
         query=query, level=level, from_ts=from_ts, to_ts=to_ts, size=size, page=page

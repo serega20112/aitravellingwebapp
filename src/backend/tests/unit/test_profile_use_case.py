@@ -1,7 +1,13 @@
-from src.backend.use_case.user.profile_use_case import ProfileUseCase
-from src.backend.domain.model.place.liked_place_model import LikedPlace
-from src.backend.tests.conftest import DummyUoW, make_user_repo, make_place_repo, DummyAI
 import pytest
+
+from src.backend.domain.model.place.liked_place_model import LikedPlace
+from src.backend.tests.conftest import (
+    DummyAI,
+    DummyUoW,
+    make_place_repo,
+    make_user_repo,
+)
+from src.backend.use_case.user.profile_use_case import ProfileUseCase
 
 
 def test_get_liked_places_user_not_found():
