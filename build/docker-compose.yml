@@ -11,13 +11,10 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   elasticsearch:
     image: elasticsearch:7.17.13
@@ -28,14 +25,11 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
     volumes:
       - es_data:/usr/share/elasticsearch/data
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9200 || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
   web:
     image: python:3.11-slim
@@ -43,68 +37,15 @@ services:
     restart: unless-stopped
     env_file:
       - ../.env
-    environment:
-      SQLALCHEMY_DATABASE_URI: postgresql://hub:hubpass@db:5432/aitravel
-      ELASTICSEARCH_HOST: http://elasticsearch:9200
-      LOG_TO_CONSOLE: "true"
-    working_dir: /app
-    volumes:
-      - ..:/app
-      - ./logs:/app/logs
+    ports:
+      - "8000:8000"
     depends_on:
       - db
       - elasticsearch
-    expose:
-      - "8000"
-    command: >
-      sh -c "
-      pip install  --upgrade pip &&
-      pip install  -r requirements.dev.txt &&
-      pip install gunicorn &&
-      gunicorn -w ${GUNICORN_WORKERS:-4} -k gthread -b 0.0.0.0:8000 main:app
-      "
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
     volumes:
-      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./certbot/www:/var/www/certbot
-      - ./certbot/conf:/etc/letsencrypt
-    depends_on:
-      - web
-
-  certbot:
-    image: certbot/certbot:latest
-    container_name: certbot
-    restart: unless-stopped
-    volumes:
-      - ./certbot/www:/var/www/certbot
-      - ./certbot/conf:/etc/letsencrypt
-    entrypoint: /bin/sh -c
-    command: "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot; sleep 12h & wait $!; done;"
-
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: cloudflared
-    restart: unless-stopped
-    command: tunnel --no-autoupdate --loglevel info --protocol http2 --edge-ip-version 4 --url http://nginx:80
-    depends_on:
-      - nginx
-
-  localtunnel:
-    image: node:18-alpine
-    container_name: localtunnel
-    restart: unless-stopped
-    working_dir: /app
-    entrypoint: sh -c
-    command: "npm i -g localtunnel && lt --port 80 --local-host nginx"
-    depends_on:
-      - nginx
+      - .:/app
+      - ./logs:/app/logs
+    command: ["sh", "-c", "pip install -r ../requirements.dev.txt && uvicorn main:app --host 0.0.0.0 --port 8000"]
 
 volumes:
   pg_data:
