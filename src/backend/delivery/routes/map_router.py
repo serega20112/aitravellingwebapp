@@ -1,5 +1,3 @@
-"""Маршруты карты и геокодинга."""
-
 from flask import Blueprint, current_app, flash, jsonify, render_template, request
 from flask.typing import ResponseReturnValue
 from flask_login import current_user
@@ -12,7 +10,15 @@ bp = Blueprint("map", __name__)
 
 @bp.route("/")
 def index() -> ResponseReturnValue:
-    """Главная страница с картой."""
+    """
+    Отображает главную страницу с интерактивной картой.
+
+    Проверяет конфигурацию ИИ-сервиса и уведомляет пользователя,
+    если сервис недоступен или не настроен.
+
+    Returns:
+        ResponseReturnValue: HTML-страница карты с флагом доступности ИИ.
+    """
     hf_token = current_app.config.get("HF_TOKEN")
     ai_service_configured = bool(hf_token)
     if not ai_service_configured:
@@ -23,10 +29,18 @@ def index() -> ResponseReturnValue:
 @bp.route("/get_location_info", methods=["POST"])
 def get_location_info_route() -> ResponseReturnValue:
     """
-    Возвращает краткое описание точки по координатам.
+    Возвращает краткое ИИ-описание точки по географическим координатам.
 
-    Тело запроса: {"latitude": float, "longitude": float}
-    Ответ: {"info": str} либо {"error": str}
+    Принимает координаты точки, валидирует входные данные и
+    запрашивает описание у сервиса мест.
+    Обрабатывает недоступность или ошибки генерации контента.
+
+    Returns:
+        ResponseReturnValue: JSON с описанием точки либо сообщением об ошибке.
+
+    Raises:
+        ValidationError: При некорректных координатах запроса.
+        Exception: При внутренних ошибках сервиса.
     """
     try:
         data = request.get_json()
@@ -36,7 +50,8 @@ def get_location_info_route() -> ResponseReturnValue:
         point_data = PointInfoRequestSchema(**data)
         place_service = current_app.extensions["services"]["place_service"]
         info = place_service.get_info_for_point(
-            point_data.latitude, point_data.longitude
+            point_data.latitude,
+            point_data.longitude,
         )
 
         error_signals = [
@@ -64,16 +79,19 @@ def get_location_info_route() -> ResponseReturnValue:
 @bp.route("/reverse_geocode", methods=["POST"])
 def reverse_geocode_route() -> ResponseReturnValue:
     """
-    Реверс‑геокодинг с ИИ‑описанием.
+    Выполняет реверс-геокодинг и формирует расширенное описание места.
 
-    Тело запроса: {"latitude": float, "longitude": float}
-    Ответ: {
-        "address": str | null,
-        "address_components": dict | null,
-        "ai_description": str | null,
-        "raw": dict | null,
-        "error": str | null
-    }
+    Определяет адрес по координатам, извлекает структурированные
+    компоненты адреса и при наличии ИИ-сервиса генерирует
+    текстовое описание с учётом пользовательских предпочтений.
+
+    Returns:
+        ResponseReturnValue: JSON с адресом, компонентами,
+        ИИ-описанием и сырыми данными геокодинга.
+
+    Raises:
+        ValidationError: При некорректных координатах.
+        Exception: При внутренних ошибках обработки.
     """
     try:
         data = request.get_json()
@@ -81,20 +99,25 @@ def reverse_geocode_route() -> ResponseReturnValue:
             return jsonify({"error": "Некорректный JSON"}), 400
 
         point = PointInfoRequestSchema(**data)
-
         services = current_app.extensions["services"]
+
         geocoder = services.get("geocoding_service")
         if geocoder is None:
             return jsonify({"error": "Сервис геокодинга не сконфигурирован"}), 503
 
-        geo = geocoder.reverse_geocode(point.latitude, point.longitude, lang="ru")
+        geo = geocoder.reverse_geocode(
+            point.latitude,
+            point.longitude,
+            lang="ru",
+        )
         address = geo.get("display_name")
         addr_components = geo.get("address")
 
         ai_service = services.get("ai_service")
         ai_text = None
+        liked_str = None
+
         if ai_service is not None:
-            liked_str = None
             try:
                 if (
                     hasattr(current_user, "is_authenticated")
@@ -131,10 +154,7 @@ def reverse_geocode_route() -> ResponseReturnValue:
             }
         )
     except ValidationError as e:
-        return (
-            jsonify({"error": "Ошибка валидации", "details": e.errors()}),
-            400,
-        )
+        return jsonify({"error": "Ошибка валидации", "details": e.errors()}), 400
     except Exception as e:
         current_app.logger.error(
             f"Неожиданная ошибка в reverse_geocode: {e}", exc_info=True
@@ -143,90 +163,4 @@ def reverse_geocode_route() -> ResponseReturnValue:
 
 
 @bp.route("/geocode_query", methods=["POST"])
-def geocode_query_route() -> ResponseReturnValue:
-    """
-    Поиск по текстовому запросу с нормализацией через ИИ и описанием места.
-
-    Тело: {"query": str}
-    Ответ: {
-        "query": str,
-        "normalized_query": str | null,
-        "address": str | null,
-        "lat": float | null,
-        "lon": float | null,
-        "ai_description": str | null,
-        "raw": dict | null,
-        "error": str | null
-    }
-    """
-    try:
-        data = request.get_json()
-        if not data or not isinstance(data.get("query"), str):
-            return jsonify({"error": "Некорректный JSON или отсутствует query"}), 400
-
-        query = data["query"].strip()
-        services = current_app.extensions["services"]
-        geocoder = services.get("geocoding_service")
-        ai_service = services.get("ai_service")
-        if geocoder is None or ai_service is None:
-            return (
-                jsonify({"error": "Сервисы геокодинга или ИИ не сконфигурированы"}),
-                503,
-            )
-
-        normalized = None
-        try:
-            if hasattr(ai_service, "normalize_location_query"):
-                normalized = ai_service.normalize_location_query(query)
-        except Exception:
-            normalized = None
-
-        search_q = normalized or query
-
-        geo = geocoder.search(search_q, lang="ru", limit=1)
-        address = geo.get("display_name")
-        lat = geo.get("lat")
-        lon = geo.get("lon")
-
-        liked_str = None
-        try:
-            if (
-                hasattr(current_user, "is_authenticated")
-                and current_user.is_authenticated
-            ):
-                profile_use_case = services.get("profile_use_case")
-                if profile_use_case:
-                    liked = profile_use_case.get_liked_places(current_user.id)
-                    if liked:
-                        liked_str = ", ".join([p.city_name for p in liked])
-        except Exception:
-            pass
-
-        ai_text = None
-        if lat is not None and lon is not None:
-            if hasattr(ai_service, "get_place_info_with_address_and_prefs"):
-                ai_text = ai_service.get_place_info_with_address_and_prefs(
-                    address,
-                    lat,
-                    lon,
-                    liked_places_str=liked_str,
-                )
-            else:
-                ai_text = ai_service.get_place_info_with_address(address, lat, lon)
-
-        return jsonify(
-            {
-                "query": query,
-                "normalized_query": normalized,
-                "address": address,
-                "lat": lat,
-                "lon": lon,
-                "ai_description": ai_text,
-                "raw": geo.get("raw"),
-            }
-        )
-    except Exception as e:
-        current_app.logger.error(
-            f"Неожиданная ошибка в geocode_query: {e}", exc_info=True
-        )
-        return jsonify({"error": "Внутренняя ошибка сервера"}), 500
+def ge

@@ -1,5 +1,3 @@
-"""Маршруты аутентификации пользователей (регистрация/вход/выход)."""
-
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask.typing import ResponseReturnValue
 from flask_login import current_user, login_required, login_user, logout_user
@@ -14,12 +12,25 @@ from src.backend.domain.exceptions.user_exceptions import (
 from src.backend.services.user.user_service import UserService
 
 auth_router = Blueprint("auth_router", __name__, url_prefix="/auth")
-user_service = UserService()  # Используем UserService вместо UserUseCase
+user_service = UserService()
 
 
 @auth_router.route("/register", methods=["GET", "POST"])
 def register() -> ResponseReturnValue:
-    """Страница регистрации и обработка отправленной формы."""
+    """Обрабатывает страницу регистрации пользователя и отправку формы.
+
+    При GET-запросе отображает страницу регистрации.
+    При POST-запросе валидирует данные формы, создаёт нового пользователя
+    и перенаправляет на страницу входа при успешной регистрации.
+
+    Returns:
+        ResponseReturnValue: HTML-страница регистрации или HTTP-редирект.
+
+    Raises:
+        ValidationError: При ошибках валидации данных формы.
+        UserAlreadyExistsError: Если пользователь с таким именем уже существует.
+        Exception: При любой непредвиденной ошибке во время регистрации.
+    """
     if current_user.is_authenticated:
         return redirect(url_for("map.index"))
 
@@ -46,7 +57,20 @@ def register() -> ResponseReturnValue:
 
 @auth_router.route("/login", methods=["GET", "POST"])
 def login() -> ResponseReturnValue:
-    """Страница входа и обработка логина пользователя."""
+    """Обрабатывает страницу входа и аутентификацию пользователя.
+
+    При GET-запросе отображает страницу входа.
+    При POST-запросе валидирует входные данные, аутентифицирует пользователя
+    и выполняет вход с учетом опции "запомнить".
+
+    Returns:
+        ResponseReturnValue: HTML-страница входа или HTTP-редирект.
+
+    Raises:
+        UserNotFoundError: Если пользователь не найден.
+        InvalidCredentials: При неверном пароле.
+        Exception: При любой непредвиденной ошибке во время входа.
+    """
     if current_user.is_authenticated:
         return redirect(url_for("map.index"))
 
@@ -76,7 +100,11 @@ def login() -> ResponseReturnValue:
 @auth_router.route("/logout")
 @login_required
 def logout() -> ResponseReturnValue:
-    """Выйти из аккаунта и перенаправить на страницу входа."""
+    """Выполняет выход пользователя и перенаправление на страницу входа.
+
+    Returns:
+        ResponseReturnValue: HTTP-редирект на страницу входа.
+    """
     logout_user()
     flash("Вы вышли из системы.", "info")
     return redirect(url_for("auth_router.login"))

@@ -1,45 +1,39 @@
-"""Password utilities for secure password hashing and verification.
-
-This module provides functions for password hashing using bcrypt,
-ensuring secure password storage and verification.
-"""
-
 import bcrypt
 
 
 def is_bcrypt_hash(s: str) -> bool:
-    """Check if string is a valid bcrypt hash.
+    """Проверяет, является ли строка валидным bcrypt-хэшем.
 
     Args:
-        s: String to check
+        s: Строка для проверки
 
     Returns:
-        True if string is a bcrypt hash, False otherwise
+        bool: True если строка является bcrypt-хэшем, иначе False.
     """
     return s.startswith(("$2a$", "$2b$", "$2y$"))
 
 
 def hash_password(password: str) -> str:
-    """Hash a password using bcrypt.
+    """Хеширует пароль с использованием bcrypt и возвращает строку хэша.
 
     Args:
-        password: Plain text password to hash
+        password: Обычный текстовый пароль
 
     Returns:
-        Hashed password as string
+        str: Хеш пароля
     """
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 
 def verify_password(a: str, b: str) -> bool:
-    """Verify a password against its hash (flexible argument order).
+    """Проверяет соответствие пароля и хэша (порядок аргументов может быть любой).
 
     Args:
-        a: Either password or hash
-        b: Either hash or password
+        a: Пароль или хеш
+        b: Пароль или хеш
 
     Returns:
-        True if password matches hash, False otherwise
+        bool: True если пароль соответствует хэшу, иначе False.
     """
     if is_bcrypt_hash(a):
         hashed, password = a, b

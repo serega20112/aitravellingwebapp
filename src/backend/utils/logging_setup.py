@@ -1,9 +1,3 @@
-"""Logging setup module for configuring application logging.
-
-This module provides comprehensive logging configuration including file logging,
-Elasticsearch integration, and JSON formatting for structured logs.
-"""
-
 from __future__ import annotations
 
 import json
@@ -18,32 +12,18 @@ from src.backend.infrastructure.logging.es_handler import ElasticsearchHandler
 
 
 class JsonFormatter(logging.Formatter):
-    """JSON formatter for structured logging.
-
-    This formatter converts log records to JSON format for better
-    parsing and analysis in log aggregation systems.
-
-    Attributes:
-        pretty: Whether to format JSON with indentation for readability
-    """
-
     def __init__(self, pretty: bool = False) -> None:
-        """Initialize JSON formatter.
-
-        Args:
-            pretty: If True, format JSON with indentation
-        """
         super().__init__()
         self.pretty = pretty
 
     def format(self, record: logging.LogRecord) -> str:
-        """Format log record as JSON.
+        """Форматирует запись лога в JSON.
 
         Args:
-            record: Log record to format
+            record: Лог-запись
 
         Returns:
-            JSON-formatted log message
+            str: JSON-строка
         """
         data = {
             "level": record.levelname,
@@ -61,14 +41,12 @@ class JsonFormatter(logging.Formatter):
 
 
 class RequestContextFilter(logging.Filter):
-    """Впрыскивает request_id и user_id (если есть) в записи логов."""
-
     def filter(self, record: logging.LogRecord) -> bool:
-        """Inject request-related fields into the log record.
+        """Добавляет request-related поля в запись лога, если есть контекст запроса.
 
-        Returns True to allow the record to pass through the filter chain.
+        Returns:
+            bool: True чтобы запись прошла фильтр.
         """
-        # Защита от использования вне контекста приложения/запроса
         if has_request_context():
             record.request_id = getattr(g, "request_id", None)
             record.user_id = getattr(getattr(g, "user", None), "id", None)
@@ -79,13 +57,7 @@ class RequestContextFilter(logging.Filter):
 
 
 class ErrorsPerFileHandler(logging.Handler):
-    """Пишет только ERROR и выше в отдельные файлы по имени исходного файла.
-
-    Пример пути: logs/errors/<module>.log (с ротацией).
-    """
-
     def __init__(self, base_dir: str, max_bytes: int, backup_count: int) -> None:
-        """Initialize handler that writes errors per module into separate files."""
         super().__init__(level=logging.ERROR)
         self.base_dir = base_dir
         self.max_bytes = max_bytes
@@ -94,7 +66,7 @@ class ErrorsPerFileHandler(logging.Handler):
         os.makedirs(self.base_dir, exist_ok=True)
 
     def emit(self, record: logging.LogRecord) -> None:  # pragma: no cover (IO)
-        """Emit a record writing it into a file named after the source module."""
+        """Записывает запись в файл, названный по исходному модулю."""
         if record.levelno < logging.ERROR:
             return
         base = os.path.basename(record.pathname) if record.pathname else "errors"
@@ -106,7 +78,6 @@ class ErrorsPerFileHandler(logging.Handler):
             handler = RotatingFileHandler(
                 target_path, maxBytes=self.max_bytes, backupCount=self.backup_count
             )
-            # форматтер возьмём из текущего хендлера, если есть
             fmt = getattr(self, "formatter", None)
             if fmt is not None:
                 handler.setFormatter(fmt)
@@ -115,11 +86,10 @@ class ErrorsPerFileHandler(logging.Handler):
 
 
 def setup_logging(app: Flask) -> None:
-    """Configure logging for the Flask application.
+    """Настраивает логирование для Flask-приложения.
 
-    Sets up console, file, per-file error logging and optional Elasticsearch
-    logging. Also installs request hooks for assigning request IDs and writing
-    access logs.
+    Подключает консоль, файл, per-file logging и (опционально) Elasticsearch.
+    Также добавляет хуки для присвоения request_id и записи access-логов.
     """
     cfg = app.config
 
@@ -130,14 +100,12 @@ def setup_logging(app: Flask) -> None:
     root_logger = logging.getLogger()
     root_logger.setLevel(log_level)
 
-    # Очищаем существующие хендлеры, чтобы не дублировать
     for h in list(root_logger.handlers):
         root_logger.removeHandler(h)
 
     formatter = JsonFormatter(pretty=bool(cfg.get("LOG_PRETTY_JSON", True)))
     context_filter = RequestContextFilter()
 
-    # Console
     if cfg.get("LOG_TO_CONSOLE", True):
         ch = logging.StreamHandler()
         ch.setLevel(
@@ -151,7 +119,6 @@ def setup_logging(app: Flask) -> None:
         ch.addFilter(context_filter)
         root_logger.addHandler(ch)
 
-    # File rotating
     if cfg.get("LOG_TO_FILE", True):
         log_file = cfg.get("LOG_FILE", "logs/app.log")
         os.makedirs(os.path.dirname(log_file), exist_ok=True)
@@ -171,7 +138,6 @@ def setup_logging(app: Flask) -> None:
         fh.addFilter(context_filter)
         root_logger.addHandler(fh)
 
-    # Errors per file
     if cfg.get("LOG_ERRORS_PER_FILE", True):
         eph = ErrorsPerFileHandler(
             base_dir=cfg.get("LOG_ERRORS_DIR", "logs/errors"),
@@ -183,7 +149,6 @@ def setup_logging(app: Flask) -> None:
         eph.addFilter(context_filter)
         root_logger.addHandler(eph)
 
-    # Elasticsearch
     if cfg.get("LOG_TO_ES", False):
         es_host = cfg.get("ELASTICSEARCH_HOST")
         if not es_host:
@@ -232,15 +197,14 @@ def setup_logging(app: Flask) -> None:
                     cfg.get("ELASTICSEARCH_HOST"),
                 )
 
-    # Access log middleware
     @app.before_request
     def _assign_request_id() -> None:
-        """Assign a unique request ID to the Flask g context."""
+        """Присваивает уникальный request_id во Flask g."""
         g.request_id = request.headers.get("X-Request-ID") or str(uuid.uuid4())
 
     @app.after_request
     def _access_log(response: Response) -> Response:
-        """Write a structured access log entry and return the response."""
+        """Записывает структурированный access-log и возвращает response."""
         try:
             logging.getLogger("access").info(
                 "HTTP %s %s -> %s",
